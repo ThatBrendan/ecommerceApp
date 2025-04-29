@@ -1,0 +1,55 @@
+:root {
+  --body-font: "Nunito_Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --bold-font: "nexa_bold";
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.4rem;
+}
+* {
+  letter-spacing: 0px !important;
+  font-synthesis: none;
+}
+.large {
+  font-size: 1.25rem;
+}
+.bold {
+  font-weight: 700 !important;
+}
+
+small,
+.small {
+  font-size: 0.75rem !important;
+}
+.thin {
+  font-weight: 300 !important;
+}
+.blue-text {
+  color: var(--blue);
+}
+.white-text {
+  color: var(--white);
+}
+
+.black-text {
+  color: var(--black);
+}
+.red-text {
+  color: var(--red);
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-underline {
+  text-decoration: underline;
+}
+.text-end {
+  text-align: end;
+}
+p.hero-title {
+  font-size: 35px;
+}
+p.product-title {
+  font-size: 35px;
+}
