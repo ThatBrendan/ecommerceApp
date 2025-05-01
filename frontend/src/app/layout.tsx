@@ -4,6 +4,7 @@ import "./style/typography.css";
 import "./style/globals.css";
 import Navbar from "./components/Navbar";
 import { ReactNode } from "react";
+import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,6 +18,9 @@ interface LayoutProps {
 const RootLayout = ({ children }: LayoutProps) => {
   return (
     <html lang="en">
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <body>
         <Navbar />
         <main>{children}</main>

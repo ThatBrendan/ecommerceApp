@@ -5,7 +5,7 @@
   --black: #000000;
   --stone: #13232f;
   --green: #629460;
-
+  --grey: #d6d2d2;
   --max-width: 1500px;
   --navbar-height: 90px;
 }
@@ -68,8 +68,103 @@ img.hero-image {
   text-align: end;
   padding: 0 20px;
 }
+.basketButton {
+  width: 100%;
+  padding: 5px;
+  border: var(--white);
+  border-radius: 10px;
+  text-align: center;
+  background: var(--green);
+  color: white;
+}
+.pagination-controls {
+  margin: 10px 0;
+}
+.pagination-buttons {
+  padding-right: 10px;
+}
+.pagination-buttons span {
+  margin-right: 10px;
+}
+.pagination-buttons button {
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: var(--blue);
+  color: var(--white);
+  margin: 0 5px;
+  border: var(--white);
+}
+.product-sort {
+  padding: 0 10px;
+}
+.product-sort select {
+  padding: 5px;
+  width: 100%;
+  border: 1px solid var(--green);
+}
+.remove-button {
+  background: none;
+  border: none;
+  text-align: center;
+}
+.checkout-product-container {
+  padding: 10px 25px;
+}
+.checkout-product-box {
+  padding: 10px 5px;
+  border: 2px solid var(--grey);
+  margin: 5px 0;
+}
+.checkout-product-text {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.checkout-image {
+  width: 100%;
+  object-fit: cover;
+  max-height: 150px;
+  height: 80px;
+}
+.remove-button-container {
+  display: flex;
+}
+input.coupon-input {
+  width: 100%;
+  padding: 5px;
+}
+button.coupon-button {
+  width: 100%;
+  padding: 5px;
+  border: var(--white);
+  border-radius: 10px;
+  text-align: center;
+  background: var(--green);
+  color: white;
+}
+.hero-text-box button {
+  padding: 5px 10px;
+  border: var(--white);
+  border-radius: 10px;
+  text-align: center;
+  background: var(--green);
+  color: white;
+  margin: 10px 0;
+}
+.coupon-container {
+  margin-top: 15px;
+}
+.search-input {
+  padding: 5px;
+  font-weight: bold;
+}
 @media screen and (max-width: 768px) {
   img.hero-image {
     height: 40vh;
+  }
+  .filter-radio {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
   }
 }

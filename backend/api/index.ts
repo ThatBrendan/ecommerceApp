@@ -11,7 +11,22 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-let basket: Array<{ name: string; color: string; price: number }> = [];
+let basket: Array<{ name: string; color: string; price: number; img: string }> =
+  [];
+let allProducts: Array<{
+  name: string;
+  color: string;
+  price: number;
+  img: string;
+}> = [...sampleData];
+
+const coupons: { [key: string]: number } = {
+  SAVE10: 0.1,
+};
+
+app.get("/all-products", (req: Request, res: Response) =>
+  res.json(allProducts)
+);
 
 app.get("/headphones", (req: Request, res: Response) => {
   let data = [...sampleData];
@@ -29,6 +44,12 @@ app.get("/headphones", (req: Request, res: Response) => {
     data = data.filter((p) => p.price >= min);
   }
 
+  //Search
+  const query = req.query.q?.toString().toLowerCase();
+  if (query && query.length >= 3) {
+    data = data.filter((product) => product.name.toLowerCase().includes(query));
+  }
+
   // Sort
   const sort = req.query.sort;
   if (sort === "price_asc") data.sort((a, b) => a.price - b.price);
@@ -43,12 +64,40 @@ app.get("/headphones", (req: Request, res: Response) => {
 app.get("/basket", (req: Request, res: Response) => res.json(basket));
 
 app.post("/basket", (req: Request, res: Response) => {
-  const { name, color, price } = req.body;
-  if (!name || !color || !price) {
+  const { name, color, price, img } = req.body;
+  if (!name || !color || !price || !img) {
     return res.status(400).json({ error: "Invalid headphone data" });
   }
-  basket.push({ name, color, price });
+  basket.push({ name, color, price, img });
   res.status(201).json({ message: "Headphone added to basket", basket });
+});
+app.get("/search", (req: Request, res: Response) => {
+  const query = req.query.q?.toString().toLowerCase();
+  if (!query || query.length < 3) {
+    return res.status(400).json({ error: "Search query required" });
+  }
+
+  const results = allProducts.filter((product) =>
+    product.name.toLowerCase().includes(query)
+  );
+
+  res.json(results);
+});
+
+app.post("/apply-coupon", (req: Request, res: Response) => {
+  const { code } = req.body;
+
+  if (!code) {
+    return res.status(400).json({ error: "Coupon code required" });
+  }
+
+  const discount = coupons[code];
+
+  if (!discount) {
+    return res.status(400).json({ error: "Invalid coupon code" });
+  }
+
+  res.json({ message: "Coupon applied successfully", discount });
 });
 
 app.delete("/basket", (req: Request, res: Response) => {

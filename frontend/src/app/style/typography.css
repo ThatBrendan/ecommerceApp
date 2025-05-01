@@ -38,6 +38,9 @@ small,
 .red-text {
   color: var(--red);
 }
+.green-text {
+  color: var(--green);
+}
 .text-uppercase {
   text-transform: uppercase;
 }
