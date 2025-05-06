@@ -11,13 +11,13 @@ export default function CheckoutPage() {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/basket")
+    fetch("http://localhost:5000/basket/")
       .then((res) => res.json())
       .then(setBasket);
   }, []);
 
   const removeItem = async (name: string) => {
-    await fetch("http://localhost:5000/basket", {
+    await fetch("http://localhost:5000/basket/", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name }),
@@ -26,7 +26,7 @@ export default function CheckoutPage() {
   };
 
   const applyCoupon = async () => {
-    const res = await fetch("http://localhost:5000/apply-coupon", {
+    const res = await fetch("http://localhost:5000/coupon/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ code: couponCode }),
@@ -95,12 +95,15 @@ export default function CheckoutPage() {
             </button>
           </div>
         </div>
-        <p className="bold text-end">Total Price: £{discountedPrice.toFixed(2)}</p>
+        <p className="bold text-end">Full Price: £{totalPrice.toFixed(2)}</p>
         {discount > 0 && (
-          <p className="bold blue-text text-end">
-            Discount Applied: - £{(totalPrice - discountedPrice).toFixed(2)}
+          <p className="bold red-text text-end">
+            Savings: - £{(totalPrice - discountedPrice).toFixed(2)}
           </p>
         )}
+        <p className="bold text-end">
+          Total (including discount): £{discountedPrice.toFixed(2)}
+        </p>
         {errorMessage && <p className="red-text">{errorMessage}</p>}
       </div>
       <div className="col-lg-6"></div>

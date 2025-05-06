@@ -16,8 +16,12 @@ export default function IndexPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       if (searchItem.length >= 3) {
-        const res = await fetch(`http://localhost:5000/search?q=${searchItem}`);
+        const res = await fetch(
+          `http://localhost:5000/products/headphones?q=${searchItem}`
+        );
         const data = await res.json();
+
+        console.log("Api Response:", data);
         setProducts(data.slice((page - 1) * limit, page * limit));
         setTotal(data.length);
       } else {
@@ -30,7 +34,9 @@ export default function IndexPage() {
           ...(minMax.max != null ? { max: minMax.max.toString() } : {}),
         });
 
-        const res = await fetch(`http://localhost:5000/headphones?${params}`);
+        const res = await fetch(
+          `http://localhost:5000/products/headphones?${params}`
+        );
         const data = await res.json();
 
         // handle both wrapped‐and‐raw shapes:

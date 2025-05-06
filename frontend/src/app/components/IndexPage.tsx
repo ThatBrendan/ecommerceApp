@@ -13,7 +13,7 @@ const IndexPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/all-products");
+        const response = await fetch("http://localhost:5000/products/all-products");
         const data = await response.json();
         setProducts(data.slice(0, 3));
       } catch (error) {
