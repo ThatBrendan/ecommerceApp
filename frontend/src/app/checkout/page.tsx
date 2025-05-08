@@ -69,7 +69,7 @@ export default function CheckoutPage() {
       </div>
 
       <div className="col-lg-6 card-payment-container">
-        <PaymentForm amount={discountedPrice} onSuccess={() => setBasket([])} />
+        <PaymentForm amount={discountedPrice} />
       </div>
     </div>
   );

@@ -3,10 +3,9 @@ import { useRouter } from "next/navigation";
 
 interface PaymentFormProps {
   readonly amount: number;
-  readonly onSuccess: () => void;
 }
 
-export default function PaymentForm({ amount, onSuccess }: PaymentFormProps) {
+export default function PaymentForm({ amount }: PaymentFormProps) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -34,8 +33,11 @@ export default function PaymentForm({ amount, onSuccess }: PaymentFormProps) {
     });
     const data = await res.json();
     if (res.ok) {
-      onSuccess();
-      router.push("/confirmation?txn=" + data.transactionId);
+      router.push(
+        `/confirmation?txn=${data.transactionId}&email=${encodeURIComponent(
+          data.email
+        )}`
+      );
     } else {
       setPaymentError(data.error ?? "Payment failed");
     }

@@ -22,5 +22,6 @@ export function processPayment(data: PaymentRequest): PaymentResponse {
     transactionId: "txn_" + Math.random().toString(36).substring(2, 11),
     status: "success",
     message: "Payment processed successfully",
+    email: data.email
   };
 }

@@ -175,6 +175,12 @@ button.coupon-button {
   border: 2px solid var(--green);
   font-weight: 700;
 }
+.confirmation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 25px 0;
+}
 
 @media screen and (max-width: 768px) {
   img.hero-image {

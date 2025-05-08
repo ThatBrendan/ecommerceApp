@@ -19,4 +19,5 @@ export interface PaymentResponse {
   transactionId: string;
   status: "success" | "failure";
   message: string;
+  email?: string;
 }
