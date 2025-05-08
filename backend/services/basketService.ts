@@ -15,3 +15,9 @@ export function removeFromBasket(name: string): Product[] {
   basket = basket.filter((item) => item.name !== name);
   return basket;
 }
+
+
+export function resetBasket () {
+  basket = []
+  return basket
+}

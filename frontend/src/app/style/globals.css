@@ -107,7 +107,8 @@ img.hero-image {
   border: none;
   text-align: center;
 }
-.checkout-product-container {
+.checkout-product-container,
+.card-payment-container {
   padding: 10px 25px;
 }
 .checkout-product-box {
@@ -131,16 +132,17 @@ img.hero-image {
 }
 input.coupon-input {
   width: 100%;
-  padding: 5px;
+  padding: 10px;
 }
 button.coupon-button {
   width: 100%;
-  padding: 5px;
+  padding: 10px;
   border: var(--white);
   border-radius: 10px;
   text-align: center;
   background: var(--green);
   color: white;
+  font-weight: 700;
 }
 .hero-text-box button {
   padding: 5px 10px;
@@ -158,6 +160,22 @@ button.coupon-button {
   padding: 5px;
   font-weight: bold;
 }
+.payment-details input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid var(--green);
+  font-weight: 700;
+}
+.payment-button {
+  width: 100%;
+  padding: 15px 10px;
+  background: var(--green);
+  color: var(--white);
+  border: 2px solid var(--green);
+  font-weight: 700;
+}
+
 @media screen and (max-width: 768px) {
   img.hero-image {
     height: 40vh;

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function CheckoutPage() {
@@ -42,8 +43,43 @@ export default function CheckoutPage() {
     }
   };
 
+  const router = useRouter();
   const totalPrice = basket.reduce((sum, item) => sum + item.price, 0);
   const discountedPrice = totalPrice * (1 - discount);
+
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [paymentError, setPaymentError] = useState("");
+
+  const handlePayment = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const body = {
+      email,
+      firstName,
+      lastName,
+      cardNumber,
+      expiryDate,
+      cvv,
+      amount: discountedPrice,
+    };
+
+    const res = await fetch("http://localhost:5000/payment/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      setBasket([]);
+      router.push("/confirmation?txn=" + data.transactionId);
+    } else {
+      setPaymentError(data.error ?? "Payment failed");
+    }
+  };
 
   return (
     <div className="row no-gutter">
@@ -102,11 +138,79 @@ export default function CheckoutPage() {
           </p>
         )}
         <p className="bold text-end">
-          Total (including discount): £{discountedPrice.toFixed(2)}
+          Total to pay: £{discountedPrice.toFixed(2)}
         </p>
         {errorMessage && <p className="red-text">{errorMessage}</p>}
       </div>
-      <div className="col-lg-6"></div>
+
+      <div className="col-lg-6 card-payment-container">
+        <form onSubmit={handlePayment}>
+          <div className="row no-gutter payment-details">
+            <div className="col-12">
+              <input
+                type="email"
+                placeholder="Please enter email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="col-5">
+              <input
+                type="text"
+                placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="col-2 "></div>
+            <div className="col-5">
+              <input
+                type="text"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="col-12">
+              <input
+                type="text"
+                placeholder="Card Number"
+                value={cardNumber}
+                onChange={(e) => setCardNumber(e.target.value)}
+                required
+              />
+            </div>
+            <div className="col-5">
+              <input
+                type="text"
+                placeholder="Expiry Date"
+                value={expiryDate}
+                onChange={(e) => setExpiryDate(e.target.value)}
+                required
+              />
+            </div>
+            <div className="col-2 hide-mobile"></div>
+            <div className="col-5">
+              <input
+                type="text"
+                placeholder="CVV"
+                value={cvv}
+                onChange={(e) => setCvv(e.target.value)}
+                required
+              />
+            </div>
+            <div className="col-12">
+              <button className="payment-button" type="submit">
+                Make Payment
+              </button>
+              {paymentError && <p className="red-text">{paymentError}</p>}
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
