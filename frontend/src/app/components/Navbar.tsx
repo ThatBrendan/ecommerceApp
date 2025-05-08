@@ -15,7 +15,7 @@ const Navbar = () => {
           <p className="">Products</p>
         </Link>
         <Link href="/checkout">
-          <p className="">Checkout</p>
+          <p className="">View Cart</p>
         </Link>
       </div>
     </div>

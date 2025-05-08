@@ -66,7 +66,7 @@ export default function IndexPage() {
 
   return (
     <div className="row no-gutter">
-      <div className="col-lg-2">
+      <div className="col-lg-2 sorting-container">
         <p>Sort by prices</p>
         <div className="filter-radio">
           <input
@@ -116,9 +116,9 @@ export default function IndexPage() {
       </div>
 
       <div className="col-lg-10">
-        <div className="row no-gutter">
-          <p className="product-title bold col-lg-8 col-6">Our products</p>
-          <div className="col-2">
+        <div className="row no-gutter product-title-bar">
+          <p className="product-title bold col-lg-8 col-12">Our products</p>
+          <div className="col-lg-2 col-6">
             <input
               type="text"
               placeholder="Search products..."
@@ -130,9 +130,8 @@ export default function IndexPage() {
               className="search-input"
             />
           </div>
-          <div className="col-lg-2 product-sort col-4">
+          <div className="col-lg-2 product-sort col-6">
             <select
-              className="col-lg-2"
               value={sort}
               onChange={(e) => {
                 setSort(e.target.value);

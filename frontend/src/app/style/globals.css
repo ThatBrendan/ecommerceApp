@@ -145,7 +145,7 @@ button.coupon-button {
   font-weight: 700;
 }
 .hero-text-box button {
-  padding: 5px 10px;
+  padding: 10px 20px;
   border: var(--white);
   border-radius: 10px;
   text-align: center;
@@ -181,6 +181,17 @@ button.coupon-button {
   align-items: center;
   margin: 25px 0;
 }
+.sorting-container {
+  padding: 0 15px;
+}
+.product-title-bar {
+  margin: 10px 0;
+}
+@media screen and (min-width: 768px) {
+  .sorting-container input {
+    margin: 10px 0;
+  }
+}
 
 @media screen and (max-width: 768px) {
   img.hero-image {
@@ -189,6 +200,12 @@ button.coupon-button {
   .filter-radio {
     display: flex;
     justify-content: space-between;
-    padding: 10px 15px;
+    padding: 10px;
+  }
+  .product-title-bar {
+    padding: 5px;
+  }
+  .sorting-container {
+    padding: 0 5px;
   }
 }
